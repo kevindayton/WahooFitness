@@ -38,6 +38,7 @@ class WahooFitness
   attr_accessor :sensors
   attr_accessor :workout
   attr_accessor :intervals
+  attr_accessor :interval_samples
   
   ## 
   # Public: Initialize a new instance of WahooFitness
