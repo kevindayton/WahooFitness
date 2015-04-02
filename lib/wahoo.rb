@@ -269,11 +269,9 @@ end
 # TODO: Add samples as an attribute.
 class WFWorkoutInterval < WFWorkout
   attr_accessor :subinterval
-  attr_accessor :samples
   
   def initialize
     @subinterval = false
-    @samples = Array.new
   end
 end
 
