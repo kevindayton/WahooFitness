@@ -268,6 +268,7 @@ end
 #
 # TODO: Add samples as an attribute.
 class WFWorkoutInterval < WFWorkout
+  attr_accessor :interval
   attr_accessor :subinterval
   
   def initialize
