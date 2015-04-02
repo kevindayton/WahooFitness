@@ -1,5 +1,7 @@
-#--
+##
 # Copyright (c) 2015 Kevin L. Dayton
+# Copyright (c) 2015 Volatile Eight Industries
+# Copyright (c) 2015 Dayton Interactive
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -19,17 +21,16 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#++
 
 require 'csv'
 require 'active_support/inflector'
 
-#
+##
 # WahooFitness
 #
+# This class represents the overall workout as recorded by the Wahoo Fitness app.
 # Based on the files produced by Wahoo Fitness iOS app Version 5.5.1
 # https://itunes.apple.com/us/app/wahoo-fitness-bluetooth-powered/id391599899?mt=8
-#
 class WahooFitness
   
   attr_accessor :meta
@@ -38,6 +39,7 @@ class WahooFitness
   attr_accessor :workout
   attr_accessor :intervals
   
+  ## 
   # Public: Initialize a new instance of WahooFitness
   #
   # path  - The file path of the file to be parsed.
@@ -47,7 +49,7 @@ class WahooFitness
   #   initialize("2015-03-22-1403_Bikingdata.csv")
   #   # => true
   #
-  # Returns the new instance.
+  # Returns the new instance with parsed data.
   def initialize(path)
     @data = CSV.read(path)
     parse
@@ -55,6 +57,7 @@ class WahooFitness
   
   protected
   
+  ## 
   # Protected: Runs through all the parser method
   #
   # Returns nothing
@@ -67,6 +70,7 @@ class WahooFitness
     @interval_samples = parse_interval_samples
   end
   
+  ## 
   # Protected: Parse workout meta data
   #
   # Returns a hash of meta data
@@ -113,6 +117,7 @@ class WahooFitness
     return meta
   end
 
+  ##
   # Protected: Parse workout comments
   #
   # Returns a string of comments
@@ -120,6 +125,7 @@ class WahooFitness
     @data[4][0]
   end
 
+  ##
   # Protected: Parses sensors
   #
   # Returns an array of sensors
@@ -147,6 +153,7 @@ class WahooFitness
     return sensors
   end
   
+  ##
   # Protected: Parses workout overview
   #
   # Returns a WFWorkout
@@ -160,6 +167,10 @@ class WahooFitness
     workout = w
   end
   
+  ##
+  # Protected: Parses workout intervals
+  #
+  # Returns an array of WFWorkoutInterval
   def parse_intervals
     intervals = Array.new
     headers_index = 16
@@ -190,6 +201,10 @@ class WahooFitness
     return intervals
   end
   
+  ##
+  # Protected: Parses workout interval samples
+  #
+  # Returns an array of WFCSVWorkoutIntervalSample
   def parse_interval_samples
     interval_samples = Array.new
     headers_index = @_interval_sample_index
@@ -211,6 +226,10 @@ class WahooFitness
   end       
 end
 
+##
+# WFSensor
+#
+# This class represents a device used during a given workout. 
 class WFSensor
   attr_accessor :type
   attr_accessor :present
@@ -219,6 +238,10 @@ class WFSensor
   attr_accessor :model
 end
 
+##
+# WFWorkout
+#
+# This class represents the summary of a given workout. 
 class WFWorkout
   attr_accessor :workout
   attr_accessor :starttime
@@ -237,6 +260,12 @@ class WFWorkout
   attr_accessor :manualdist
 end
 
+##
+# WFWorkoutInterval
+#
+# This class represents the summary of a given workout.
+#
+# TODO: Add samples as an attribute.
 class WFWorkoutInterval < WFWorkout
   attr_accessor :subinterval
   attr_accessor :samples
@@ -247,6 +276,10 @@ class WFWorkoutInterval < WFWorkout
   end
 end
 
+##
+# WFCSVWorkoutIntervalSample
+#
+# This class represents a given sample as parsed from the CSV file.
 class WFCSVWorkoutIntervalSample
   attr_accessor :cad_cadence
   attr_accessor :disp_altitude
