@@ -5,11 +5,11 @@ This is a Ruby library for parsing the files produced by the [Wahoo Fitness iOS 
 To provide a simple way to read and manipulate workout data from the Wahoo Fitness app.
 
 ## Releases
-* 0.1 (Coming Soon)
+* 0.1.0 (Coming Soon)
   * Parsing the .csv file
 
 ## Roadmap
-* 1.0
+* 1.0.0
   * Basic parsing of the .csv and .wf 
 
 ## Notes
