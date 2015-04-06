@@ -43,16 +43,26 @@ class WahooFitness
   ## 
   # Public: Initialize a new instance of WahooFitness
   #
-  # path  - The file path of the file to be parsed.
+  # str - The file path of the file to be parsed or a string with the contents
+  # of a file.
+  #
+  # file - A boolean that determines is it will process a file or string
   #
   # Examples
   #
-  #   initialize("2015-03-22-1403_Bikingdata.csv")
+  #   initialize("2015-03-22-1403_Biking.csv")
+  #   # => true
+  #
+  #   initialize("Device,fisica,model,key,version,1,AppVersion,5.5.1...",false)
   #   # => true
   #
   # Returns the new instance with parsed data.
-  def initialize(path)
-    @data = CSV.read(path)
+  def initialize(str,file = true)
+    if file
+      @data = CSV.read(str)
+    else
+      @data = CSV.parse(str)  
+    end
     parse
   end
   
