@@ -273,6 +273,7 @@ class WFWorkout
   attr_accessor :gpsdist
   attr_accessor :smoothnessavg
   attr_accessor :manualdist
+  alias_method :manual_dist, :manualdist
 end
 
 ##
