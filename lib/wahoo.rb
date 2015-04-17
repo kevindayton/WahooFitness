@@ -100,6 +100,7 @@ class WahooFitness
     meta[@data[1][12]] = @data[1][13]
     # This is some cleanup that needs to happen because of an oddity (bug?) in 
     # the WF/CSV files in version 5.5.1.
+    if ["5.5.0","5.5.1"].include? meta["AppVersion"]
     day = Hash.new
     hour = Hash.new
     minu = Hash.new
@@ -125,6 +126,9 @@ class WahooFitness
     end 
     meta.merge! day
     meta.merge! hour
+    meta.merge! minu 
+    meta.merge! sec
+    end 
     return meta
   end
 
@@ -269,6 +273,7 @@ class WFWorkout
   attr_accessor :gpsdist
   attr_accessor :smoothnessavg
   attr_accessor :manualdist
+  alias_method :manual_dist, :manualdist
 end
 
 ##
